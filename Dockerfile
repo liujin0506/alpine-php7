@@ -59,6 +59,7 @@ RUN apk update \
 	    php7-dom@community \
 	    php7-redis@community\
 	    php7-tokenizer@community \
+	    php7-imagick@community \
 	    php7-gd@community \
 		php7-fileinfo@community \
 		php7-zmq@community \
