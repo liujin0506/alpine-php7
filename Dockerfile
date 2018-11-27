@@ -60,10 +60,8 @@ RUN apk update \
 	    php7-redis@community\
 	    php7-tokenizer@community \
 	    php7-gd@community \
-		php7-mongodb@testing \
 		php7-fileinfo@community \
 		php7-zmq@community \
-		php7-memcached@community \
 		php7-xmlreader@community \
  	&& cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime \
 	&& echo "${TIMEZONE}" > /etc/timezone \
