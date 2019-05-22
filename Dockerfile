@@ -25,6 +25,7 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN apk update \
 	&& apk upgrade \
 	&& apk add \
+		vim \
 		curl \
 		tzdata \
 		unixodbc \
