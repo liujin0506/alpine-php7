@@ -27,6 +27,7 @@ RUN apk update \
 	&& apk add \
 		curl \
 		tzdata \
+		unixodbc \
 	    php7@community \
 	    php7-dev@community \
 	    php7-apcu@community \
@@ -47,6 +48,7 @@ RUN apk update \
 	    php7-mysqli@community \
 	    php7-pdo_mysql@community \
 	    php7-pdo_pgsql@community \
+	    php7-pdo_odbc@community \
 	    php7-phar@community \
 	    php7-posix@community \
 	    php7-session@community \
@@ -89,5 +91,9 @@ RUN sed -i "s|;*date.timezone =.*|date.timezone = ${TIMEZONE}|i" /etc/php7/php.i
 # composer
 RUN curl -sS https://getcomposer.org/installer | \
     php -- --install-dir=/usr/bin/ --filename=composer
+
+# composer laravel mirror
+
+RUN composer config -g repo.packagist composer https://packagist.laravel-china.org
 
 CMD ["/usr/bin/php", "-a"]
