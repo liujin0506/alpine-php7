@@ -95,6 +95,6 @@ RUN curl -sS https://getcomposer.org/installer | \
 
 # composer laravel mirror
 
-RUN composer config -g repo.packagist composer https://packagist.laravel-china.org
+RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 CMD ["/usr/bin/php", "-a"]
