@@ -71,7 +71,12 @@ RUN apk update \
  	&& cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime \
 	&& echo "${TIMEZONE}" > /etc/timezone \
 	&& apk del tzdata \
- 	&& rm -rf /var/cache/apk/*
+ 	&& rm -rf /var/cache/apk/* \
+	&& cd / \
+ 	&& wget https://www.vertica.com/client_drivers/10.0.x/10.0.1-0/vertica-client-10.0.1-0.x86_64.tar.gz \
+ 	&& tar -zxvf vertica-client-10.0.1-0.x86_64.tar.gz \
+ 	&& ldd /opt/vertica/lib64/libverticaodbc.so \
+ 	&& rm -rf vertica-client-10.0.1-0.x86_64.tar.gz
 
 # https://github.com/docker-library/php/issues/240
 # https://gist.github.com/guillemcanal/be3db96d3caa315b4e2b8259cab7d07e
