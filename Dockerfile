@@ -29,6 +29,7 @@ RUN apk update \
 		curl \
 		tzdata \
 		unixodbc \
+		unixodbc-dev \
 	    php7@community \
 	    php7-dev@community \
 	    php7-apcu@community \
