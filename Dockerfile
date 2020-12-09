@@ -72,12 +72,7 @@ RUN apk update \
  	&& cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime \
 	&& echo "${TIMEZONE}" > /etc/timezone \
 	&& apk del tzdata \
- 	&& rm -rf /var/cache/apk/* \
-	&& cd / \
- 	&& wget https://my.vertica.com/client_drivers/9.3.x/9.3.1-0/vertica-client-9.3.1-0.x86_64.rpm \
- 	&& rpm -ivh vertica-client-9.3.1-0.x86_64.rpm \
- 	&& ldd /opt/vertica/lib64/libverticaodbc.so \
- 	&& rm -rf vertica-client-9.3.1-0.x86_64.rpm
+ 	&& rm -rf /var/cache/apk/*
 
 # https://github.com/docker-library/php/issues/240
 # https://gist.github.com/guillemcanal/be3db96d3caa315b4e2b8259cab7d07e
@@ -87,6 +82,10 @@ RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/co
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 RUN rm -rf /var/cache/apk/*
 
+COPY ./vertica-client-9.3.1-0.x86_64.rpm /vertica-client-9.3.1-0.x86_64.rpm
+
+RUN rpm -ivh /vertica-client-9.3.1-0.x86_64.rpm \
+	&& ldd /opt/vertica/lib64/libverticaodbc.so
 
 # Set environments
 RUN sed -i "s|;*date.timezone =.*|date.timezone = ${TIMEZONE}|i" /etc/php7/php.ini && \
