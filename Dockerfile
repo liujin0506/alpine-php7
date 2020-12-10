@@ -82,11 +82,6 @@ RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/co
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 RUN rm -rf /var/cache/apk/*
 
-COPY ./vertica-client-9.3.1-0.x86_64.rpm /vertica-client-9.3.1-0.x86_64.rpm
-
-RUN rpm -ivh /vertica-client-9.3.1-0.x86_64.rpm \
-	&& ldd /opt/vertica/lib64/libverticaodbc.so
-
 # Set environments
 RUN sed -i "s|;*date.timezone =.*|date.timezone = ${TIMEZONE}|i" /etc/php7/php.ini && \
 	sed -i "s|;*memory_limit =.*|memory_limit = ${PHP_MEMORY_LIMIT}|i" /etc/php7/php.ini && \
