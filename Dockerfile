@@ -30,7 +30,6 @@ RUN apk update \
 		tzdata \
 		unixodbc \
 		unixodbc-dev \
-		rpm@community \
 	    php7@community \
 	    php7-dev@community \
 	    php7-apcu@community \
@@ -66,9 +65,9 @@ RUN apk update \
 	    php7-tokenizer@community \
 	    php7-imagick@community \
 	    php7-gd@community \
-		php7-fileinfo@community \
-		php7-zmq@community \
-		php7-xmlreader@community \
+	    php7-fileinfo@community \
+	    php7-zmq@community \
+	    php7-xmlreader@community \
  	&& cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime \
 	&& echo "${TIMEZONE}" > /etc/timezone \
 	&& apk del tzdata \
@@ -81,6 +80,7 @@ RUN apk update \
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 RUN rm -rf /var/cache/apk/*
+
 
 # Set environments
 RUN sed -i "s|;*date.timezone =.*|date.timezone = ${TIMEZONE}|i" /etc/php7/php.ini && \
