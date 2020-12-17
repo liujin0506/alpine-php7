@@ -1,6 +1,6 @@
 # https://github.com/liujin0506/alpine-php7
 
-FROM alpine:edge
+FROM alpine:latest
 
 MAINTAINER liujing <liujin0506@qq.com>
 
@@ -29,6 +29,7 @@ RUN apk update \
 		curl \
 		tzdata \
 		unixodbc \
+		unixodbc-dev \
 	    php7@community \
 	    php7-dev@community \
 	    php7-apcu@community \
@@ -71,15 +72,6 @@ RUN apk update \
 	&& echo "${TIMEZONE}" > /etc/timezone \
 	&& apk del tzdata \
  	&& rm -rf /var/cache/apk/*
-
-# https://github.com/docker-library/php/issues/240
-# https://gist.github.com/guillemcanal/be3db96d3caa315b4e2b8259cab7d07e
-# https://forum.alpinelinux.org/forum/installation/php-iconv-issue
-
-RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
-RUN rm -rf /var/cache/apk/*
-
 
 # Set environments
 RUN sed -i "s|;*date.timezone =.*|date.timezone = ${TIMEZONE}|i" /etc/php7/php.ini && \
