@@ -73,6 +73,14 @@ RUN apk update \
 	&& apk del tzdata \
  	&& rm -rf /var/cache/apk/*
 
+# https://github.com/docker-library/php/issues/240
+# https://gist.github.com/guillemcanal/be3db96d3caa315b4e2b8259cab7d07e
+# https://forum.alpinelinux.org/forum/installation/php-iconv-issue
+
+RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+RUN rm -rf /var/cache/apk/*
+
 # Set environments
 RUN sed -i "s|;*date.timezone =.*|date.timezone = ${TIMEZONE}|i" /etc/php7/php.ini && \
 	sed -i "s|;*memory_limit =.*|memory_limit = ${PHP_MEMORY_LIMIT}|i" /etc/php7/php.ini && \
