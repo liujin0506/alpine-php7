@@ -28,8 +28,6 @@ RUN apk update \
 		vim \
 		curl \
 		tzdata \
-		unixodbc \
-		unixodbc-dev \
 	    php7@community \
 	    php7-dev@community \
 	    php7-apcu@community \
@@ -50,7 +48,6 @@ RUN apk update \
 	    php7-mysqli@community \
 	    php7-pdo_mysql@community \
 	    php7-pdo_pgsql@community \
-	    php7-pdo_odbc@community \
 	    php7-phar@community \
 	    php7-posix@community \
 	    php7-session@community \
